@@ -1,0 +1,17 @@
+[package]
+name = "breakr"
+version = "0.1.0"
+authors = ["unseddd"]
+edition = "2018"
+
+[dependencies]
+afl = "0.8.0"
+clap = "2.33"
+config = "0.10.1"
+failure = "0.1.7"
+hyper = "0.13"
+hyper-tls = "^0.4"
+libfuzzer-sys = "0.3"
+tokio = { version = "0.2", features = ["full"] }
+evm = { git = "https://github.com/sorpaas/rust-evm" }
+web3 = { git = "https://github.com/tomusdrw/rust-web3" }

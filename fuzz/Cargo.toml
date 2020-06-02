@@ -1,0 +1,28 @@
+
+[package]
+name = "breakr-fuzz"
+version = "0.0.0"
+authors = ["Automatically generated"]
+publish = false
+edition = "2018"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.3"
+hyper = "0.13.1"
+hyper-tls = "0.4.1"
+evm = { git = "https://github.com/sorpaas/rust-evm" }
+web3 = { git = "https://github.com/tomusdrw/rust-web3" }
+
+[dependencies.breakr]
+path = ".."
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[[bin]]
+name = "evm"
+path = "fuzz_targets/evm.rs"
