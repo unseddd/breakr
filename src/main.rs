@@ -1,8 +1,8 @@
+#[macro_use]
+extern crate anyhow;
+
 extern crate config;
 extern crate hyper;
-
-#[macro_use]
-extern crate failure;
 
 use std::{collections::HashMap, fs::File, io::Write};
 
@@ -14,7 +14,7 @@ use hyper::body::HttpBody;
 
 use tokio;
 
-async fn download_contract(address: &str) -> Result<(), failure::Error> {
+async fn download_contract(address: &str) -> Result<(), anyhow::Error> {
     let https = HttpsConnector::new();
     let client = Client::builder().build::<_, hyper::Body>(https);
     let config = load_config()?;
@@ -28,7 +28,7 @@ async fn download_contract(address: &str) -> Result<(), failure::Error> {
     let contract = if let Some(contract_res) = res.body_mut().data().await {
         contract_res?
     } else {
-        return Err(format_err!("failed to extract contract response"));
+        return Err(anyhow!("failed to extract contract response"));
     };
 
     let contract_str = contract.iter().map(|b| format!("{:02x}", b) ).collect::<Vec<String>>().join("");
@@ -45,7 +45,7 @@ async fn download_contract(address: &str) -> Result<(), failure::Error> {
     Ok(())
 }
 
-fn load_config() -> Result<HashMap<String, String>, failure::Error> {
+fn load_config() -> Result<HashMap<String, String>, anyhow::Error> {
     let mut settings = config::Config::default();
     settings
         .merge(config::File::with_name("Settings"))?
