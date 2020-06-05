@@ -1,6 +1,9 @@
 extern crate config;
 extern crate hyper;
 
+#[macro_use]
+extern crate failure;
+
 use std::{collections::HashMap, fs::File, io::Write};
 
 use clap::{Arg, App};
@@ -8,7 +11,6 @@ use clap::{Arg, App};
 use hyper_tls::HttpsConnector;
 use hyper::{Body, Client, Method, Request};
 use hyper::body::HttpBody;
-
 
 use tokio;
 
@@ -23,7 +25,12 @@ async fn download_contract(address: &str) -> Result<(), failure::Error> {
     let mut res = client.request(req).await?;
 
     // get response body, and convert ABI bytes to a hex-string
-    let contract = res.body_mut().data().await.unwrap()?;
+    let contract = if let Some(contract_res) = res.body_mut().data().await {
+        contract_res?
+    } else {
+        return Err(format_err!("failed to extract contract response"));
+    };
+
     let contract_str = contract.iter().map(|b| format!("{:02x}", b) ).collect::<Vec<String>>().join("");
     let contract_bytes = contract_str.as_bytes();
 
