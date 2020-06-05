@@ -35,3 +35,12 @@ To run the fuzzer on a local smart contract ABI, copy the ABI to the file `fuzz/
 ```
 cargo fuzz run evm
 ```
+
+`cargo-fuzz` also supports using dictionaries for formatted input. For example, you can use the example dictionary:
+
+```
+cargo fuzz run evm -- -dict=fuzz/dict/input
+```
+
+Dictionary entries are separated by newline characters, and are used by the fuzzer to generated mutated input. For smart
+contracts, this will almost always mean providing function signatures with known-good inputs as arguments (in ABI format).
