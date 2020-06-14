@@ -44,3 +44,13 @@ cargo fuzz run evm -- -dict=fuzz/dict/input
 
 Dictionary entries are separated by newline characters, and are used by the fuzzer to generated mutated input. For smart
 contracts, this will almost always mean providing function signatures with known-good inputs as arguments (in ABI format).
+
+## Credits
+
+`breakr` is basically just glue-code around more substantive projects.
+
+Namely:
+
+- [SputnikVM](https://github.com/rust-blockchain/evm)
+- [web3](https://github.com/tomusdrw/rust-web3)
+- [cargo-fuzz](https://github.com/rust-fuzz/cargo-fuzz)
