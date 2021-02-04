@@ -1,6 +1,6 @@
 [package]
 name = "breakr"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["unseddd"]
 edition = "2018"
 
@@ -10,7 +10,4 @@ config = "0.10.1"
 anyhow = "1.0.31"
 hyper = "0.13"
 hyper-tls = "0.4"
-libfuzzer-sys = "0.3"
 tokio = { version = "0.2", features = ["full"] }
-evm = "0.16.1"
-web3 = "0.11.0"

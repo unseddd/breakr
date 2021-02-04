@@ -1,27 +1,16 @@
-
 [package]
-name = "breakr-fuzz"
-version = "0.0.0"
-authors = ["Automatically generated"]
-publish = false
+name = "fuzz"
+version = "0.1.0"
+authors = ["Nym Seddon <unseddd@shh.xyz>"]
 edition = "2018"
+default-run = "evm"
 
-[package.metadata]
-cargo-fuzz = true
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-libfuzzer-sys = "0.3"
-hyper = "0.13.1"
-hyper-tls = "0.4.1"
-evm = { git = "https://github.com/sorpaas/rust-evm" }
-web3 = { git = "https://github.com/tomusdrw/rust-web3" }
-
-[dependencies.breakr]
-path = ".."
-
-# Prevent this from interfering with workspaces
-[workspace]
-members = ["."]
+evm = "0.16.1"
+honggfuzz = "0.5"
+web3 = "0.11.0"
 
 [[bin]]
 name = "evm"

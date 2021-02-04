@@ -1,2 +1,5 @@
 /target
 *.swp
+settings.toml
+hfuzz_target
+hfuzz_workspace
